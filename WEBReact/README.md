@@ -1,31 +1,26 @@
-# React + .NET 8
+# React + Node.js + Docker Compose + MySql
 
-## TEST Accruent
+## Teste Bycoders
 
-To run the application is necessary download the project at GitHub.
+Essa API faz o insert de dados de movimentações financeiras e gera relatórios de tipos de movimentação e saldo por loja.
+O Frontend consome a API e nele é possível fazer o upload de um arquivo com dados de movimentações financeiras, para
+serem salvas no banco de dados. Também é possível visualizar o relatório de movimentações financeiras e saldo em uma 
+grid na tela.
 
-	https://github.com/quadradosimi/TestAccruent.git
+Para rodar a aplicação é necessário fazer o download do projeto no GitHub
 
-Run Back-end
-	
-	Open the .Net 8 project on TestMoutTi.sln file. Change the ConnectionStrings with your database settings, at file appsettings.json.
-	Run the migration to build database structure with code below 
+	https://github.com/quadradosimi/TesteBycoders
 
-		add-migration [name]
-		
-	and after run
+Rodar Front-end
 
-		update-database
-		
-	Choice https in Visual Studio to start the software and run. The swagger will appear.
-		
-Run Front-end
-
-	The front-end application is inside folder Web/TestAccruent. Change SERVER_URL at the Web/TestAccruent/config.json () with the right API url. 
-	At the prompt get in Web/TestAccruent folder and run code below
+	No cmd na pasta (.\TesteBycoders\WEBReact) rode os comandos abaixo para rodar o frontend
 	
 		npm i
-		
 		npm run dev
 		
-	The locally server will run and show the url to set in browser. 
+	Acesse no browser a url http://localhost:5173
+
+
+
+	
+			
