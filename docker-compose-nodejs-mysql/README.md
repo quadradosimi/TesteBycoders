@@ -1,51 +1,99 @@
-# Docker Compose Nodejs and MySQL example
+# React + Node.js + Docker Compose + MySql
 
-## Run the System
-We can easily run the whole with only a single command:
-```bash
-docker compose up
-```
+## Teste Bycoders
 
-Docker will pull the MySQL and Node.js images (if our machine does not have it before).
+Essa API faz o insert de dados de movimentações financeiras e gera relatórios de tipos de movimentação e saldo por loja.
+O Frontend consome a API e nele é possível fazer o upload de um arquivo com dados de movimentações financeiras, para
+serem salvas no banco de dados. Também é possível visualizar o relatório de movimentações financeiras e saldo em uma 
+grid na tela.
 
-The services can be run on the background with command:
-```bash
-docker compose up -d
-```
+Para rodar a aplicação é necessário fazer o download do projeto no GitHub
 
-## Stop the System
-Stopping all the running containers is also simple with a single command:
-```bash
-docker compose down
-```
+	https://github.com/quadradosimi/TesteBycoders
 
-If you need to stop and remove all containers, networks, and all images used by any service in <em>docker-compose.yml</em> file, use the command:
-```bash
-docker compose down --rmi all
-```
+Rodar Back-end
+	
+	No cmd na pasta (.\TesteBycoders\docker-compose-nodejs-mysql) rode o comando abaixo para gerar os containers da API e do banco de dados MySql
+	
+		docker compose up --build 
+	
+	Se conecte ao MySql do container e no banco de dados financial_db rode os scripts SqlAddTables e SqlAddTransactionsTypes, que estão dentro da 
+	pasta (.TesteBycoders\Scripts)	
+	
+Teste Back-end
 
-For more detail, please visit:
-> [Dockerize Node.js Express and MySQL example - Docker Compose](https://www.bezkoder.com/docker-compose-nodejs-mysql/)
+	No cmd na pasta (.\TesteBycoders\docker-compose-nodejs-mysql\BycodersTeste\app\test) execute o comando abaixo para rodar os testes
+	
+		npm test
 
-Related Posts:
-> [Build Node.js Rest APIs with Express & MySQL](https://www.bezkoder.com/node-js-rest-api-express-mysql/)
+Arquitetura da API Restfull
 
-> [Upload/store images in MySQL using Node.js, Express & Multer](https://www.bezkoder.com/node-js-upload-image-mysql/)
+	arquitetura de software
+				
+		- Arquitetura Monolitica
+		- Arquitetura em Camadas
+					
+	arquitetura de código
+				
+		- uso de DDD 
+		- Clean-Code
+		- Solid Principles
+		- Contar com pipelines automatizadas de CI/CD Pipelines usando por exemplo SonarCube e GitActions
+		
+Documentação da API
 
-> [Node.js: Upload CSV file data into Database with Express](https://bezkoder.com/node-js-upload-csv-file-database/)
+	URL Base
+	
+		api/financial/
 
-> [Node.js: Upload Excel file data into Database with Express](https://www.bezkoder.com/node-js-upload-excel-file-database/)
+	Endpoints
+	
+		* GET FinancialMovementbyEachStore {sem parâmetros}
+		
+			Response:
+			{
+				Name: "Loja Teste",
+				Description: "Crédito",
+				Total: "100"
+			}
+			
+			curl -X GET http://"servidor":"porta"/api/financial/FinancialMovementbyEachStore
+		
+		* POST InsertFileData
+		
+			Body: 
+			{
+				"id": 1,
+				"idTransaction":1,
+				"date": 1234,
+				"value": 12345,
+				"cpf": "12346",
+				"card": "12347",
+				"hour": 12348,
+				"owner": "teste",
+				"name": "loja teste"
+			}
+			
+			Response: (200 ok)
+			{
+				"id": 1,
+				"idTransaction":1,
+				"date": 1234,
+				"value": 12345,
+				"cpf": "12346",
+				"card": "12347",
+				"hour": 12348,
+				"owner": "teste",
+				"name": "loja teste"
+			}
+			
+			curl -X POST -H "Content-Type: application/json" -d '{"id":"1","idTransaction":"1","date":1234,"value":12345,"cpf":"12346","card":"12346","hour":12348,"owner":"teste","name":"loja teste"}' http://"servidor":"porta"/api/financial/InsertFileData
 
-> [Build Node.js Rest APIs with Express, Sequelize & MySQL](https://bezkoder.com/node-js-express-sequelize-mysql/)
+			
+		
+	
 
-> [Server side Pagination in Node.js with Sequelize and MySQL](https://bezkoder.com/node-js-sequelize-pagination-mysql/)
+	
 
-> [Deploying/Hosting Node.js app on Heroku with MySQL database](https://bezkoder.com/deploy-node-js-app-heroku-cleardb-mysql/)
-
-Security:
-> [Node.js Express: JWT example | Token Based Authentication & Authorization](https://bezkoder.com/node-js-jwt-authentication-mysql/)
-
-Associations:
-> [Sequelize Associations: One-to-Many Relationship example](https://bezkoder.com/sequelize-associate-one-to-many/)
-
-> [Sequelize Associations: Many-to-Many Relationship example](https://bezkoder.com/sequelize-associate-many-to-many/)
+	
+			
